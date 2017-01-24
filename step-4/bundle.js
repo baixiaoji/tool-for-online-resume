@@ -50,7 +50,7 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _leancloudStorage = __webpack_require__(4);
+	var _leancloudStorage = __webpack_require__(3);
 
 	var _leancloudStorage2 = _interopRequireDefault(_leancloudStorage);
 
@@ -63,14 +63,6 @@
 	  appKey: APP_KEY
 	});
 
-	var TestObject = _leancloudStorage2.default.Object.extend('TestObject');
-	var testObject = new TestObject();
-	testObject.save({
-	  words: 'Hello World!'
-	}).then(function (object) {
-	  alert('LeanCloud Rocks!');
-	});
-
 	var app = new _vue2.default({
 	  el: '#app',
 	  data: {
@@ -81,7 +73,7 @@
 	    },
 	    newTodo: '',
 	    todoList: [],
-	    checked: false
+	    currentUser: null
 	  },
 	  created: function created() {
 	    var _this = this;
@@ -94,6 +86,8 @@
 	    var oldDataString = window.localStorage.getItem("myTodos");
 	    var oldData = JSON.parse(oldDataString);
 	    this.todoList = oldData || [];
+
+	    this.currentUser = this.getCurrentUser();
 	  },
 	  methods: {
 	    addTodo: function addTodo() {
@@ -108,6 +102,48 @@
 	    removeTodo: function removeTodo(todo) {
 	      var i = this.todoList.indexOf(todo);
 	      this.todoList.splice(i, 1);
+	    },
+	    signUp: function signUp() {
+	      var user = new _leancloudStorage2.default.User();
+	      // 设置用户名
+	      user.setUsername(this.formData.username);
+	      // 设置密码
+	      user.setPassword(this.formData.password);
+
+	      user.signUp().then(function (loginedUser) {
+	        this.currentUser = this.getCurrentUser();
+	        console.log(this.currentUser);
+	      }, function (error) {
+	        alert("注册失败");
+	      });
+	    },
+	    login: function login() {
+	      var _this2 = this;
+
+	      _leancloudStorage2.default.User.logIn(this.formData.username, this.formData.password).then(function (loginedUser) {
+
+	        _this2.currentUser = _this2.getCurrentUser();
+	      }, function (error) {
+	        alert("登录失败");
+	      });
+	    },
+	    getCurrentUser: function getCurrentUser() {
+
+	      var current = _leancloudStorage2.default.User.current();
+	      if (current) {
+	        var id = current.id,
+	            createdAt = current.createdAt,
+	            username = current.attributes.username;
+
+	        return { id: id, username: username, createdAt: createdAt };
+	      } else {
+	        return null;
+	      }
+	    },
+	    logout: function logout() {
+	      _leancloudStorage2.default.User.logOut();
+	      this.currentUser = null;
+	      window.location.reload();
 	    }
 	  }
 	});
@@ -8821,8 +8857,7 @@
 
 
 /***/ },
-/* 3 */,
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, Buffer) {(function webpackUniversalModuleDefinition(root, factory) {
@@ -22801,10 +22836,10 @@
 	/******/ ]);
 	});
 	//# sourceMappingURL=av.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(5).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(4).Buffer))
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -22817,9 +22852,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(6)
-	var ieee754 = __webpack_require__(7)
-	var isArray = __webpack_require__(8)
+	var base64 = __webpack_require__(5)
+	var ieee754 = __webpack_require__(6)
+	var isArray = __webpack_require__(7)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -24600,7 +24635,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -24720,7 +24755,7 @@
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -24810,7 +24845,7 @@
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;

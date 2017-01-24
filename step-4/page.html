@@ -70,7 +70,7 @@
 	.f-right{
 		float: right;
 	}
-	button{
+	button.remove{
 		margin:10px;
 		background: transparent;
 		border: none;
@@ -79,13 +79,13 @@
   </style>
   <body>
     <div id="app">
-    	<section id="signAndSignUp">
+    	<section id="signInAndSignUp" v-if="!currentUser">
     		<div>
     			<label ><input type="radio" v-model="actionType" name="type" value="signUp">注册</label>
     			<label ><input type="radio"  v-model="actionType" name="type" value="login">登入</label>
     		</div>
-    		<div class="signUp" v-if="actionType=='signUp'">
-    			<form action="">
+    		<div class="signUp" v-if="actionType === 'signUp'">
+    			<form @submit.prevent="signUp">
     				<div class="formRow">
     					用户名：<input type="text" v-model="formData.username">
     				</div>
@@ -97,13 +97,13 @@
     				</div>
     			</form>
     		</div>
-    		<div class="login" v-if="actionType=='login'">
-    			<form action="">
+    		<div class="login" v-if="actionType === 'login'">
+    			<form @submit.prevent="login">
     				<div class="formRow">
-    					用户名：<input type="text">
+    					用户名：<input type="text" v-model="formData.username">
     				</div>
     				<div class="formRow">
-    					密码：<input type="password">
+    					密码：<input type="password" v-model="formData.password">
     				</div>
     				<div class="fromAction">
     					<input type="submit" value="登入">
@@ -111,7 +111,8 @@
     			</form>
     		</div>
     	</section>
-    	<section id="todo">
+    	<section id="todo" v-if="currentUser">
+    		<div><button @click="logout">登出</button></div>
     		  <h1>TODO清单</h1>
 	          <div class="newTask">
 	          	<input type="text" v-model="newTodo" @keyup.enter="addTodo">
@@ -127,7 +128,7 @@
 		          		<span class="f-right" v-if="todo.done">已完成</span>
 		          		<span class="f-right" v-else>未完成</span>
 	          		</p>
-	          		<button @click="removeTodo(todo)">X</button>
+	          		<button class="remove" @click="removeTodo(todo)">X</button>
 	          	</li>
 	          </ol>
     	</section>

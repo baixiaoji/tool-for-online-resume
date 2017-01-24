@@ -8,13 +8,7 @@ AV.init({
   appKey: APP_KEY
 });
 
-var TestObject = AV.Object.extend('TestObject');
-var testObject = new TestObject();
-testObject.save({
-  words: 'Hello World!'
-}).then(function(object) {
-  alert('LeanCloud Rocks!');
-})
+
 
 var app = new Vue({
   el: '#app',
@@ -26,7 +20,7 @@ var app = new Vue({
     },
     newTodo: '',
     todoList:[],
-    checked:false
+    currentUser:null
   },
   created:function(){
   	window.onbeforeunload = () => {
@@ -37,6 +31,8 @@ var app = new Vue({
   	let oldDataString = window.localStorage.getItem("myTodos")
   	let oldData = JSON.parse(oldDataString)
   	this.todoList = oldData || []
+
+    this.currentUser = this.getCurrentUser();
   },
   methods:{
   	addTodo:function(){
@@ -51,6 +47,44 @@ var app = new Vue({
   	removeTodo:function(todo){
   		let i = this.todoList.indexOf(todo);
   		this.todoList.splice(i,1);
-  	}
+  	},
+    signUp:function(){
+      let user = new AV.User();
+      // 设置用户名
+      user.setUsername(this.formData.username);
+      // 设置密码
+      user.setPassword(this.formData.password);
+
+      user.signUp().then(function (loginedUser) {
+        this.currentUser =this.getCurrentUser()
+          console.log(this.currentUser);
+      }, function (error) {
+        alert("注册失败")
+      });
+    },
+    login:function(){
+      AV.User.logIn(this.formData.username, this.formData.password).then((loginedUser) => {
+        
+        this.currentUser = this.getCurrentUser()
+
+      }, function (error) {
+        alert("登录失败")
+      });
+    },
+    getCurrentUser:function(){
+      
+       let current = AV.User.current();
+       if(current){
+           let {id, createdAt, attributes: {username}} = current
+            return {id, username, createdAt}
+       }else{
+         return null
+       }
+    },
+    logout:function(){
+      AV.User.logOut()
+      this.currentUser = null
+      window.location.reload()
+    }
   }
 })         
