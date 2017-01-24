@@ -1,0 +1,47 @@
+<html>
+ <meta charset="utf-8">
+  <head>
+    <title>TodoList</title>
+  </head>
+  <style>
+  	html{
+  		font-size: 16px;
+  		font-family:"Microsoft YaHei";
+  		/*text-align: center;*/
+  		background: #b0f2e5;
+  	}
+	#app{
+		width:900px;
+		margin:0 auto;
+	}
+	h1,.newTask{
+		text-align: center;
+	}
+	.newTask input{
+		width:600px;
+		height:25px;
+		padding-left:5px;
+		border-radius:5px;
+		outline: none;
+		border: 1px solid #ccc;
+	}
+  </style>
+  <body>
+    <div id="app">
+    	<h1>TODO</h1>
+          <div class="newTask">
+          	<input type="text" v-model="newTodo" @keyup.enter="addTodo">
+          </div>
+          <ol class="todos">
+          	<li v-for="todo in todoList">
+          		<input type="checkbox" v-model="todo.done">
+          		{{todo.title}} {{todo.createdAt}}
+          		<span v-if="todo.done">已完成</span>
+          		<span v-else>未完成</span>
+          		<button @click="removeTodo(todo)">X</button>
+          	</li>
+          </ol>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
