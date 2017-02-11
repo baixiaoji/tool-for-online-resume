@@ -1,0 +1,139 @@
+<html>
+ <meta charset="utf-8">
+  <head>
+    <title>TodoList</title>
+  </head>
+  <style>
+  	html{
+  		font-size: 16px;
+  		font-family:"Microsoft YaHei";
+  		background: #ffc600;
+  	}
+	#app{
+		width:900px;
+		margin:20px auto;
+	}
+	h1{
+		color:#fff;
+	}
+	h1,.newTask{
+		text-align: center;
+	}
+	.newTask input{
+		width:600px;
+		height:35px;
+		font-size: 25px;
+		padding:3px 0 3px 5px;
+		margin:10px 0;
+		border-radius:5px;
+		outline: none;
+		border: 1px solid #ccc;
+	    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+	}
+	.todos{
+		max-width: 600px;
+	    margin: 50px auto;
+	    padding-left: 0;
+	    background: white;
+	    border-radius: 5px;
+	    box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+	}
+	.todos>li{
+		display: flex;
+	    align-items: center;
+	    border-bottom: 1px solid #F1F1F1;
+	}
+	input[type="checkbox"] {
+	    margin: 20px;
+	}
+	input:checked + p {
+     /*background: #F9F9F9; */
+	    text-decoration: line-through;
+	}
+	p {
+		position: relative;
+	    margin: 0;
+	    padding: 20px;
+	    transition: background 0.2s;
+	    flex: 1;
+	    font-family: 'helvetica neue';
+	    font-size: 20px;
+	    font-weight: 200;
+	    border-left: 1px solid #D1E2FF;
+	}
+	.time{
+		position: absolute;
+		right:0;
+		bottom:0px;
+		font-size: 12px;
+	}
+	.f-right{
+		float: right;
+	}
+	button.remove{
+		margin:10px;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+	}
+  </style>
+  <body>
+    <div id="app">
+    	<section id="signInAndSignUp" v-if="!currentUser">
+    		<div>
+    			<label ><input type="radio" v-model="actionType" name="type" value="signUp">注册</label>
+    			<label ><input type="radio"  v-model="actionType" name="type" value="login">登入</label>
+    		</div>
+    		<div class="signUp" v-if="actionType === 'signUp'">
+    			<form @submit.prevent="signUp">
+    				<div class="formRow">
+    					用户名：<input type="text" v-model="formData.username">
+    				</div>
+    				<div class="formRow">
+    					密码：<input type="password" v-model="formData.password">
+    				</div>
+    				<div class="fromAction">
+    					<input type="submit" value="注册">
+    				</div>
+    			</form>
+    		</div>
+    		<div class="login" v-if="actionType === 'login'">
+    			<form @submit.prevent="login">
+    				<div class="formRow">
+    					用户名：<input type="text" v-model="formData.username">
+    				</div>
+    				<div class="formRow">
+    					密码：<input type="password" v-model="formData.password">
+    				</div>
+    				<div class="fromAction">
+    					<input type="submit" value="登入">
+    				</div>
+    			</form>
+    		</div>
+    	</section>
+    	<section id="todo" v-if="currentUser">
+    		<div><button @click="logout">登出</button></div>
+    		  <h1>TODO清单</h1>
+	          <div class="newTask">
+	          	<input type="text" v-model="newTodo" @keyup.enter="addTodo">
+	          </div>
+	          <ol class="todos">
+	          	<li v-for="todo in todoList">
+	          		<input type="checkbox" v-model="todo.done">
+	          		<p>
+	          			{{todo.title}} 
+	          			<span class="time">
+	          				{{todo.createdAt}}
+	          			</span>
+		          		<span class="f-right" v-if="todo.done">已完成</span>
+		          		<span class="f-right" v-else>未完成</span>
+	          		</p>
+	          		<button class="remove" @click="removeTodo(todo)">X</button>
+	          	</li>
+	          </ol>
+    	</section>
+	      
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
