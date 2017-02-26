@@ -45,9 +45,9 @@
                         {field: "contacts",icon: "phone"},
                     ],
                     profile:{
-                        name:'',
-                        city:'',
-                        title:''
+                        name:'baixiaoji',
+                        city:'Hangzhou',
+                        title:'blablabla'
                     },
                     'work history':[
                         {company: 'XIN', content: '我的第二份工作是'},
