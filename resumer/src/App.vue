@@ -1,9 +1,12 @@
 <template>
-    <div>
-      <p>{{text}}</p>
-      <Topbar />
-      <ResumeEditor/>
-      <ResumePreview/>
+    <div class=page>
+      <header>
+        <Topbar/>
+      </header>
+      <main>
+        <ResumeEditor />
+        <ResumePreview />
+      </main>
     </div>
 </template>
 
@@ -29,5 +32,29 @@ export default {
 </script>
 
 <style>
- p{color:red;}
+  .page{
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    background:#eaebec;
+  }
+  .page>main{
+    flex-grow: 1;
+  }
+  .page>main{
+    min-width:1024px;
+    max-width:1440px;
+    margin-top:16px;
+    margin-bottom:16px;
+    display: flex;
+    justify-content: space-around;
+  }
+  #resumeEditor{
+    width:35%;
+    background:#444;
+  }
+  #resumePreview{
+    width:61.66667%;
+    background:#777;
+  }
 </style>
