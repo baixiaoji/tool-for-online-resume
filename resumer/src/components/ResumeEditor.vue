@@ -50,11 +50,11 @@
                         title:''
                     },
                     'work history':[
-                        {company: 'AL', content: '我的第二份工作是'},
-                        {company: 'TX', content: '我的第一份工作是'},
+                        {company: 'XIN', content: '我的第二份工作是'},
+                        {company: 'FF', content: '我的第一份工作是'},
                     ],
                     education:[
-                        {school: 'AL', content: '文字'},
+                        {school: 'SD', content: '文字'},
                         {school: 'TX', content: '文字'},
                     ],
                     projects:[
