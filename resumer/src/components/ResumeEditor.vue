@@ -15,7 +15,7 @@
                     <div class="subitem" v-for="subitem in resume[item.field]">
                         <div class="resumeField" v-for="(value,key) in subitem">
                             <label >{{key}}</label>
-                            <input type="text" :value="value">
+                            <input type="text" :value="value" >
                         </div>
                         <hr>
                     </div>
