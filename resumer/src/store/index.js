@@ -4,12 +4,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
-        count: 0,
         selected:'profile',
         resume:{
             config:[
                 {field: "profile",icon: "id"},
-                {field: "work history",icon: "work"},
+                {field: "workHistory",icon: "work"},
                 {field: "education",icon: "book"},
                 {field: "projects",icon: "heart"},
                 {field: "awards",icon: "cup"},
@@ -17,16 +16,21 @@ export default new Vuex.Store({
             ],
             profile:{
                 name:'baixiaoji',
-                city:'Hangzhou',
-                title:'blablabla'
+                city:'大杭州',
+                title:'哈哈哈哈哈',
+                birthday:'1996-08-28'
             },
-            'work history':[
-                {company: 'XIN', content: '我的第二份工作是'},
-                {company: 'FF', content: '我的第一份工作是'},
+            workHistory:[
+                {
+                    company: 'XIN', content: '我的第二份工作是'
+                },
+                {
+                    company: 'FF', content: '我的第一份工作是'
+                },
             ],
             education:[
-                {school: 'SD', content: '文字'},
-                {school: 'TX', content: '文字'},
+                {school: '警官学院', content: '本科'},
+                {school: '渔业', content: '文字'},
             ],
             projects:[
                 {name: 'project A', content: '文字'},
@@ -44,9 +48,6 @@ export default new Vuex.Store({
     },
     
     mutations:{
-        increment(state){
-            state.count++
-        },
         switchTab(state,payload){
             state.selected = payload
         }
