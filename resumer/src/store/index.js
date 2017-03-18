@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import objectPath from "object-path"
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -51,8 +52,9 @@ export default new Vuex.Store({
         switchTab(state,payload){
             state.selected = payload
         },
-        updateResume(state, {filed, subfiled, value}){
-            state.resume[filed][subfiled] = value
+        updateResume(state, {path, value}){
+            objectPath.set(state.resume, path, value)
+            
         }
     }
 })
