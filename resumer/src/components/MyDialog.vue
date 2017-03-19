@@ -39,8 +39,8 @@
   }
   .dialog{
     background: white;
-    min-height: 4em;
-    min-width: 10em;
+    height: 180px;
+    width: 500px;
     > header{
       padding: 16px;
       display: flex;
