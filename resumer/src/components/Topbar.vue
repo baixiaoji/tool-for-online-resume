@@ -20,8 +20,7 @@
         <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
             <SignUpForm @success="signIn($event)" />
         </MyDialog>
-        <MyDialog title="登录" :visible="signInDialogVisible"
-         @close="signInDialogVisible = false">
+        <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
             <SignInForm @success="signIn($event)" />
         </MyDialog>
     </div>
