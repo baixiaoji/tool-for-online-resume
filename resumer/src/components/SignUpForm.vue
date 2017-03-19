@@ -18,6 +18,7 @@
 <script>
 import AV from "../lib/leancloud"
 import getErrorMessage from "../lib/getErrorMessage"
+import getAVUser from "../lib/getAVUser"
 
 export default {
     name: "SignUpForm",
@@ -41,11 +42,8 @@ export default {
             user.setUsername(username)
             user.setPassword(password)
             
-            user.signUp().then((loginedUser) => {
-                this.$emit("success",{
-                    username: loginedUser.attributes.username,
-                    id: loginedUser.id
-                })
+            user.signUp().then(() => {
+                this.$emit("success",getAVUser())
             }, (err) => {
                 this.errorMessage = getErrorMessage(err)
             })
