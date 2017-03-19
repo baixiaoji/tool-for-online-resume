@@ -5,7 +5,7 @@
             <div class="actions">
                 <a href="#" class="button primary" @click.prevent="signUpDialogVisible=true">注册</a>
                 <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
-                    我就是 slot 内容
+                   <SignUpForm @success="login($event)" />
                 </MyDialog>
                 <a href="#" class="button">登录</a>
                 <button class="button primary">保存</button>
@@ -19,6 +19,7 @@
 
 <script>
     import MyDialog from "./MyDialog"
+    import SignUpForm from "./SignUpForm"
     export default {
         name: 'Topbar',
         data(){
@@ -27,7 +28,7 @@
             }
         },
         components:{
-            MyDialog
+            MyDialog, SignUpForm
         }
     }
 </script>

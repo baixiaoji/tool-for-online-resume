@@ -22,7 +22,7 @@
                 </div>
                 <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                     <label> {{key}}</label>
-                    <input type="text" :value="value" @input="changeResumeFiled( `${item.filed}.${key}`,$event.target.value  )">
+                    <input type="text" :value="value" @input="changeResumeFiled( `${item.filed}.${key}`, $event.target.value )">
                 </div>
             </li>
         </ol>
@@ -47,6 +47,7 @@
         },
         methods:{
             changeResumeFiled(path, value){
+                console.log("使用我了")
                 this.$store.commit("updateResume",{
                     path,
                     value
