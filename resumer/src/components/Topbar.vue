@@ -20,8 +20,8 @@
         <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
             <SignUpForm @success="signIn($event)" />
         </MyDialog>
-        <MyDialog titel="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
-            <SignInForm />
+        <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
+            <SignInForm @success="signIn($event)" />
         </MyDialog>
     </div>
 </template>
@@ -57,6 +57,7 @@
             },
             signIn(user) {
                 this.signUpDialogVisible = false
+                this.signInDialogVisible = false
                 this.$store.commit("setUser", user)
             }
         }
