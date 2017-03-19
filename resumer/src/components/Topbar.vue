@@ -8,7 +8,7 @@
                     <button class="button" href="#" @click.prevent="signOut">登出</button>
                 </div>
                 <div v-else class="userActions">
-                    <a href="#" @click.prevent="signUpDialogVisible=true" class="button primary">注册</a>
+                    <a href="#" @click.prevent="signUpDialogVisible = true" class="button primary">注册</a>
 
                     <a href="#" class="button" @click.prevent="signInDialogVisible = true">登录</a>
 
@@ -20,7 +20,8 @@
         <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
             <SignUpForm @success="signIn($event)" />
         </MyDialog>
-        <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
+        <MyDialog title="登录" :visible="signInDialogVisible"
+         @close="signInDialogVisible = false">
             <SignInForm @success="signIn($event)" />
         </MyDialog>
     </div>
