@@ -3,11 +3,17 @@
         <div class="wrapper">
             <span class="logo">Resumer</span>
             <div class="actions">
-                <a href="#" class="button primary" @click.prevent="signUpDialogVisible=true">注册</a>
-                <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
-                   <SignUpForm @success="login($event)" />
-                </MyDialog>
-                <a href="#" class="button">登录</a>
+                <div v-if="logined" class="userActions">
+                    <span>你好，{{user.username}}</span>
+                    <button class="button" href="#">登出</button>
+                </div>
+                <div v-else class="userActions">
+                    <a href="#" @click.prevent="signUpDialogVisible=true" class="button primary">注册</a>
+                    <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
+                        <SignUpForm @success="login($event)"/>
+                    </MyDialog>                    
+                    <a href="#" class="button">登录</a>
+                </div>
                 <button class="button primary">保存</button>
                 <button class="button">预览</button>
             </div>
@@ -29,6 +35,20 @@
         },
         components:{
             MyDialog, SignUpForm
+        },
+        computed: {
+            user(){
+                return this.$store.state.user
+            },
+            logined(){
+                return this.user.id
+            }
+        },
+        methods: {
+            login(user){
+                this.signUpDialogVisible = false
+                this.$store.commit("setUser",user)
+            }
         }
     }
 </script>
@@ -76,7 +96,10 @@
         }
     }
 
-    .actions > a{
-
+    .actions {
+        display: flex;
+        .userActions{
+            margin-right: 3em;
+        }
     }
 </style>
