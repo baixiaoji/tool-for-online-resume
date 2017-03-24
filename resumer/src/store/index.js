@@ -20,34 +20,27 @@ export default new Vuex.Store({
                 {field: "contacts",icon: "phone"},
             ],
             profile:{
-                name:'baixiaoji',
-                city:'大杭州',
-                title:'哈哈哈哈哈',
-                birthday:'1996-08-28'
+                name:'',
+                city:'',
+                title:'',
+                birthday:''
             },
             workHistory:[
                 {
-                    company: 'XIN', content: '我的第二份工作是'
-                },
-                {
-                    company: 'FF', content: '我的第一份工作是'
+                    company: '', content: ''
                 },
             ],
             education:[
-                {school: '警官学院', content: '本科'},
-                {school: '渔业', content: '文字'},
+                {school: '', content: ''}
             ],
             projects:[
-                {name: 'project A', content: '文字'},
-                {name: 'project B', content: '文字'},
+                {name: '', content: ''}
             ],
             awards:[
-                {name: '三好学生', content: '连续十年'},
-                {name: '奖学金'},
+                {name: '', content: ''}
             ],
             contacts:[
-                {contact: 'phone', content: '187657234'},
-                {contact: 'qq', content: '12345678'},
+                {contact: '', content: ''}
             ],
         }
     },
