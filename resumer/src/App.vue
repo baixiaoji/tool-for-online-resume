@@ -35,7 +35,7 @@
 
       let state = localStorage.getItem("state")
       if (state) {
-        state = JSON.parse(state)
+        // state = JSON.parse(state)
       } 
       this.$store.commit("initState", state)
       this.$store.commit("setUser",getAVUser())
