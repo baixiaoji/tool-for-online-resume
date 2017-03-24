@@ -10,7 +10,7 @@
             <small>{{resume.profile.birthday}}</small>
         </p>
         </section>
-        <section data-name='projects' v-show="resume.projects">
+        <section data-name='projects' v-show="resume.projects.length > 0">
             <h2>项目经历</h2>
             <ol>
                 <li v-for="item in resume.projects">
@@ -19,7 +19,7 @@
                 </li>
             </ol>
         </section>
-        <section data-name="workHistory" v-show="resume.workHistory">
+        <section data-name="workHistory" v-show="resume.workHistory.length > 0">
         <h2>工作经历</h2>
         <ol>
             <li v-for="item in resume.workHistory">
@@ -29,7 +29,7 @@
         </ol>
         </section>
 
-        <section data-name="education" v-show="resume.education">
+        <section data-name="education" v-show="resume.education.length > 0">
         <h2>毕业院校</h2>
         <ol>
             <li v-for="item in resume.education">
@@ -39,7 +39,7 @@
             </li>
         </ol>
         </section>
-        <section data-name='awards' v-show="resume.awards">
+        <section data-name='awards' v-show="resume.awards.length > 0">
             <h2>获奖情况</h2>
             <ol>
                 <li v-for="item in resume.awards">
@@ -48,7 +48,7 @@
                 </li>
             </ol>
         </section>
-        <section data-name='contacts' v-show="resume.contacts">
+        <section data-name='contacts' v-show="resume.contacts.length > 0">
             <h2>联系方式</h2>
             <table>
                 <tr v-for="item in resume.contacts">
