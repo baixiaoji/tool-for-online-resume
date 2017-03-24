@@ -10,23 +10,23 @@ export default new Vuex.Store({
             id: "",
             username: ""
         },
+        resumeConfig:[
+            {field: "profile",icon: "id",keys:["name","city","title","birthday"]},
+            {field: "workHistory",icon: "work",type:"array",keys:["company","details"]},
+            {field: "education",icon: "book",type:"array",keys:["school","details"]},
+            {field: "projects",icon: "heart",type: "array",keys:["name","details"]},
+            {field: "awards",icon: "cup",type:"array", keys:["name","details"]},
+            {field: "contacts",icon: "phone",type:"array",keys:["contact","content"]},
+        ],
         resume:{
-            config:[
-                
-                {field: "profile",icon: "id",keys:["name","city","title","birthday"]},
-                {field: "workHistory",icon: "work",type:"array",keys:["company","details"]},
-                {field: "education",icon: "book",type:"array",keys:["school","details"]},
-                {field: "projects",icon: "heart",type: "array",keys:["name","details"]},
-                {field: "awards",icon: "cup",type:"array", keys:["name","details"]},
-                {field: "contacts",icon: "phone",type:"array",keys:["contact","content"]},
-            ],
-        }
+
+        }        
     },
     
     mutations:{
         initState(state,payload){
            
-           state.resume.config.map( (item)=>{
+           state.resumeConfig.map( (item)=>{
                if(item.type === "array"){
                    // 这里写 Vue无法监听属性变化
                 //   state.resume[item.field] = [];
@@ -56,6 +56,17 @@ export default new Vuex.Store({
         },
         removeUser(state){
             state.user.id = "";
+        },
+        addResumeSubfield(state,{field}){
+            let empty = {}
+            state.resume[field].push( empty )
+
+            state.resumeConfig.filter( (i) => i.field === field)[0].keys.map((key) => {
+                Vue.set(empty,key,"")
+            })
+        },
+        delResumeField(state,{path}){
+            objectPath.del(state.resume, path)
         }
     }
 })

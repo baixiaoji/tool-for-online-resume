@@ -2,7 +2,7 @@
     <div id="resumeEditor">
         <nav>
             <ol>
-                <li v-for="(item,index) in resume.config" :class="{active: item.field === selected}" @click="selected = item.field">
+                <li v-for="(item,index) in resumeConfig" :class="{active: item.field === selected}" @click="selected = item.field">
                    <svg class="icon">
                         <use :xlink:href="`#icon-${item.icon}`"></use>
                    </svg>
@@ -10,15 +10,17 @@
             </ol>
         </nav>
         <ol class="panels">
-            <li v-for="item in resume.config" v-show="item.field === selected">
+            <li v-for="item in resumeConfig" v-show="item.field === selected">
                 <div v-if="item.type === 'array' ">
                     <div class="subitem" v-for="(subitem, i) in resume[item.field]">
                         <div class="resumeField" v-for="(value,key) in subitem">
                             <label >{{key}}</label>
                             <input type="text" :value="value" @input =" changeResumeFiled(`${item.field}.${i}.${key}`, $event.target.value)">
                         </div>
+                        <button class="delThis" @click="delResumeField(`${item.field}.${i}`)">删除</button>
                         <hr>
                     </div>
+                    <button class="addNew" @click="addResumeSubfield(item.field)">新增</button>
                 </div>
                 <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                     <label> {{key}}</label>
@@ -43,6 +45,9 @@
             },
             resume (){
                 return this.$store.state.resume
+            },
+            resumeConfig(){
+                return this.$store.state.resumeConfig
             }
         },
         methods:{
@@ -52,6 +57,12 @@
                     path,
                     value
                 })
+            },
+            addResumeSubfield(field){
+                this.$store.commit("addResumeSubfield",{field})
+            },
+            delResumeField(path){
+                this.$store.commit("delResumeField",{path})
             },
             add(){
                 this.$store.commit("increment")
@@ -117,5 +128,11 @@
             margin:24px 0;
         }
 
+    }
+    button.addNew {
+        background-color: #f2510f;
+        padding: 5px;
+        border: none;
+        color: white;
     }
 </style>
