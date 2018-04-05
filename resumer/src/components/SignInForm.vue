@@ -3,15 +3,15 @@
     <form @submit.prevent="signIn">
       <div class="row">
         <label>用户名</label>
-        <input type="text" required v-model="formData.username">
+        <el-input type="text" required v-model="formData.username" />
       </div>
       <div class="row">
         <label>密码</label>
-        <input type="password" required v-model="formData.password">
+        <el-input type="password" required v-model="formData.password" />
       </div>
       <div class="actions">
-        <input type="submit" value="提交">
-        <span>{{errorMessage}}</span>
+        <el-input type="submit" value="提交" />
+        <!--<span>{{errorMessage}}</span>-->
       </div>
     </form>
   </div>
@@ -22,9 +22,13 @@
 import AV from '../lib/leancloud'
 import getErrorMessage from '../lib/getErrorMessage'
 import getAVUser from '../lib/getAVUser'
+import {Input} from 'element-ui'
 
 export default {
   name: 'SignInForm',
+  components:{
+        'el-input': Input
+    },
   data(){
     return {
       formData: {
@@ -41,8 +45,14 @@ export default {
         // this.$store.commit('setUser', getAVUser())
         this.$emit("success",getAVUser())
       }, (error)=> {
-        this.errorMessage = getErrorMessage(error)
-      });
+        // this.errorMessage = getErrorMessage(error)
+        this.$msg.error(getErrorMessage(error))
+      }).finally((err) => {
+                this.formData = {
+                    username: "",
+                    password: ""
+                }
+            });
     }
   }
 }

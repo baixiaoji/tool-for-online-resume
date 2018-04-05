@@ -15,16 +15,17 @@
                     <div class="subitem" v-for="(subitem, i) in resume[item.field]">
                         <div class="resumeField" v-for="(value,key) in subitem">
                             <label >{{key}}</label>
-                            <input type="text" :value="value" @input =" changeResumeFiled(`${item.field}.${i}.${key}`, $event.target.value)">
+                            <input type="text" :value="value" 
+                                      @input ="changeResumeFiled(`${item.field}.${i}.${key}`, $event.target.value)" />
                         </div>
-                        <button class="delThis" @click="delResumeField(`${item.field}.${i}`)">删除</button>
+                        <el-button size="small" type="danger" class="delThis" @click="delResumeField(`${item.field}.${i}`)">删除</el-button>
                         <hr>
                     </div>
-                    <button class="addNew" @click="addResumeSubfield(item.field)">新增</button>
+                    <el-button size="small" type="success"  @click="addResumeSubfield(item.field)">新增</el-button>
                 </div>
                 <div v-else class="resumeField" v-for="(value,key) in resume[item.field]">
                     <label> {{key}}</label>
-                    <input type="text" :value="value" @input="changeResumeFiled( `${item.field}.${key}`, $event.target.value )">
+                    <input type="text" :value="value" @input="changeResumeFiled( `${item.field}.${key}`, $event.target.value )" />
                 </div>
             </li>
         </ol>
@@ -32,8 +33,12 @@
 </template>
 
 <script>
+    import {Button} from 'element-ui'
     export default {
         name: 'ResumeEditor',
+        components:{
+            'el-button': Button,
+        },
         computed: {
             selected :{
                 get(){
@@ -52,7 +57,6 @@
         },
         methods:{
             changeResumeFiled(path, value){
-                console.log("使用我了")
                 this.$store.commit("updateResume",{
                     path,
                     value
@@ -76,7 +80,7 @@
         box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
         display: flex;
         flex-direction: row;
-        overflow: auto;
+        overflow: hidden;
         > nav{
             width:80px;
             background: black;
@@ -97,6 +101,7 @@
             }
         }
         > .panels{
+            overflow: auto;
             flex-grow: 1;
             > li{
                 padding:24px;
@@ -115,11 +120,21 @@
             }
             input[type=text]{
                 margin:16px 0;
-                border:1px solid #ddd;
-                box-shadow:inset 0 1px 3px 0 rgba(0,0,0,0.25);
-                width:100%;
-                height:40px;
-                padding:0 8px;
+                -webkit-appearance: none;
+                background-color: #fff;
+                background-image: none;
+                border-radius: 4px;
+                border: 1px solid #dcdfe6;
+                box-sizing: border-box;
+                color: #606266;
+                display: inline-block;
+                font-size: inherit;
+                height: 40px;
+                line-height: 40px;
+                outline: none;
+                padding: 0 15px;
+                transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+                width: 100%;
             }
         }
         hr{

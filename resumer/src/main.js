@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import { Message } from 'element-ui'
 
 /* eslint-disable no-new */
 new Vue({
@@ -12,3 +12,5 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+Vue.prototype.$msg = Message

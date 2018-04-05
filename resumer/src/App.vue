@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class=page>
-      <header>
+    <el-container class=page>
+      <el-header>
         <Topbar/>
-      </header>
-      <main>
+      </el-header>
+      <el-main>
         <ResumeEditor />
         <ResumePreview />
-      </main>
-    </div>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -20,16 +20,24 @@
   import ResumeEditor from "./components/ResumeEditor"
   import ResumePreview from "./components/ResumePreview"
   import icons from './assets/icons'
-
+  import {Container, Header, Main} from 'element-ui'
   import store from './store/index'
   import AV from "./lib/leancloud"
   import getAVUser from "./lib/getAVUser"
 
-
+// <el-container>
+//   <el-header>Header</el-header>
+//   <el-main>Main</el-main>
+//   <el-footer>Footer</el-footer>
+// </el-container>
   export default {
     name: 'app',
     store,
-    components: { Topbar, ResumeEditor, ResumePreview},
+    components: { Topbar, ResumeEditor, ResumePreview,
+      'el-container': Container,
+      'el-header': Header,
+      'el-main': Main
+    },
     created() {
       document.body.insertAdjacentHTML("afterbegin", icons)
 

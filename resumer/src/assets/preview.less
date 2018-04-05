@@ -1,0 +1,46 @@
+#resumePreview{
+    background: white;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    padding:1.3em 15px;
+    color:#333;
+    line-height: 1.2;
+    overflow: auto;
+    .ture_name{
+        margin-top: 5px;
+        margin-bottom: 6px; 
+    }
+    .user_title{
+        font-size:20px;
+    }
+    *{box-sizing:border-box;font-variant:normal;font-weight:normal;}
+    ol{list-style: none;}
+    section + section { margin-top:1.5em;}
+    p{white-space:pre-line;}
+    section {
+        > h2:first-child{
+        //   background: #ddd;
+          font-weight: 500;
+          display:inline-block;
+          padding:.2em;
+          margin-bottom:.5em;
+        }
+    }
+    section[data-name="workHistory"],
+    section[data-name="projects"],
+    section[data-name="awards"]{
+        li + li {margin-top: 1em;}
+        li {
+            h3{border-bottom:1px solid #999;padding-bottom:.3em;margin-bottom:.3em}
+        }
+    }
+    section[data-name='education']{
+        li {
+            line-height:1.5;
+        }
+    }
+    section[data-name='contacts']{
+        td:first-child {
+            padding-right: 1em;
+        }
+    }
+  }

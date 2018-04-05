@@ -1,34 +1,38 @@
 <template>
     <div id="topbar">
         <div class="wrapper">
-            <span class="logo">Resumer</span>
+            <span class="logo">简历</span>
             <div class="actions">
                 <div v-if="logined" class="userActions">
+                    <i class="el-icon-usr"></i>
                     <span class="weclome">你好，{{user.username}}</span>
-                    <button class="button" href="#" @click.prevent="signOut">登出</button>
+                    <el-button size="small" type="danger" round  @click.prevent="signOut">登出</el-button>
                 </div>
                 <div v-else class="userActions">
-                    <a href="#" @click.prevent="signUpDialogVisible = true" class="button primary">注册</a>
+                    <el-button size="small" type="primary" round  @click.prevent="signUpDialogVisible = true">注册</el-button>
 
-                    <a href="#" class="button" @click.prevent="signInDialogVisible = true">登录</a>
-
+                    <el-button size="small" type="primary" round  @click.prevent="signInDialogVisible = true">登录</el-button>
                 </div>
             </div>
         </div>
-        <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
+        <Dialog title="注册" width="400px" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
             <SignUpForm @success="signIn($event)" />
-        </MyDialog>
-        <MyDialog title="登录" :visible="signInDialogVisible" @close="signInDialogVisible = false">
+        </Dialog>
+        <!--<MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible= false">
+            <SignUpForm @success="signIn($event)" />
+        </MyDialog>-->
+        <Dialog title="登录" width="400px" :visible="signInDialogVisible" @close="signInDialogVisible = false">
             <SignInForm @success="signIn($event)" />
-        </MyDialog>
+        </Dialog>
     </div>
 </template>
 
 <script>
-    import MyDialog from "./MyDialog"
+    // import MyDialog from "./MyDialog"
     import SignUpForm from "./SignUpForm"
     import SignInForm from "./SignInForm"
     import AV from "../lib/leancloud"
+    import { Button, Dialog } from 'element-ui';
     export default {
         name: 'Topbar',
         data() {
@@ -38,7 +42,11 @@
             }
         },
         components: {
-            MyDialog, SignUpForm, SignInForm
+            // MyDialog,
+            SignUpForm, 
+            SignInForm,
+            "el-button": Button,
+            Dialog,
         },
         computed: {
             user() {
@@ -67,8 +75,8 @@
         background: #fff;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
         >.wrapper {
-            min-width: 1024px;
-            max-width: 1440px;
+            // min-width: 1024px;
+            // max-width: 1440px;
             margin: 0 auto;
             height: 64px;
         }

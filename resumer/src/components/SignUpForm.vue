@@ -1,16 +1,16 @@
 <template>
-    <div>
+    <div class="signUp">
         <form @submit.prevent="signUp">
             <div class="row">
                 <label>用户名</label>
-                <input type="text" v-model="formData.username" required>
+                <el-input type="text" v-model="formData.username" required />
             </div>
             <div class="row">
                 <label>密码</label>
-                <input type="text" v-model="formData.password" required>
+                <el-input type="password" v-model="formData.password" required />
             </div>
-            <div class="action">
-                <input type="submit" value="提交">
+            <div class="action mt-10">
+                <el-input type="submit" value="提交" />
             </div>
         </form>
     </div>
@@ -19,9 +19,12 @@
 import AV from "../lib/leancloud"
 import getErrorMessage from "../lib/getErrorMessage"
 import getAVUser from "../lib/getAVUser"
-
+import {Input} from 'element-ui'
 export default {
     name: "SignUpForm",
+    components:{
+        'el-input': Input
+    },
     data(){
         return {
             formData: {
@@ -45,9 +48,28 @@ export default {
             user.signUp().then(() => {
                 this.$emit("success",getAVUser())
             }, (err) => {
-                this.errorMessage = getErrorMessage(err)
+                
+                // this.errorMessage = getErrorMessage(err.code)
+                this.$msg.error(getErrorMessage(err))
+            }).finally((err) => {
+                this.formData = {
+                    username: "",
+                    password: ""
+                }
             })
         }
     }
 }
 </script>
+<style lang="less">
+.signUp{
+    margin-top: -10px;
+}
+.row{
+    margin-bottom: 8px;
+    label{
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+</style>

@@ -21,8 +21,7 @@ export default new Vuex.Store({
         resume:{
 
         }        
-    },
-    
+    },   
     mutations:{
         initState(state,payload){
            
