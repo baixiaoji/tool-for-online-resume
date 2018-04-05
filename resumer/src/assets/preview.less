@@ -14,15 +14,15 @@
     }
     *{box-sizing:border-box;font-variant:normal;font-weight:normal;}
     ol{list-style: none;}
-    section + section { margin-top:1.5em;}
+    section + section { margin-top:1.2em;}
     p{white-space:pre-line;}
     section {
         > h2:first-child{
         //   background: #ddd;
           font-weight: 500;
           display:inline-block;
-          padding:.2em;
-          margin-bottom:.5em;
+          padding:.2em .1em;
+          margin-bottom:.3em;
         }
     }
     section[data-name="workHistory"],
@@ -30,7 +30,14 @@
     section[data-name="awards"]{
         li + li {margin-top: 1em;}
         li {
-            h3{border-bottom:1px solid #999;padding-bottom:.3em;margin-bottom:.3em}
+            h3{
+                // border-bottom:1px solid #999;
+                // padding-bottom:.3em;
+                margin-bottom:.3em
+            }
+            p{
+                color: #666;
+            }
         }
     }
     section[data-name='education']{

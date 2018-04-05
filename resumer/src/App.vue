@@ -54,15 +54,17 @@
 
 <style lang="less">
   .page {
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
+    min-width: 1024px!important;
+    // display: flex;
+    // flex-direction: column;
     background: #eaebec;
     main {
       flex-grow: 1;
     }
     main {
-      min-width: 1024px;
+      // min-width: 1024px;
       max-width: 1440px;
       margin-top: 16px;
       margin-bottom: 16px;

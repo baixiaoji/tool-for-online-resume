@@ -117,6 +117,7 @@
     .actions {
         display: flex;
         .userActions {
+            vertical-align: middle;
             .welcome {
                 margin-right: .5em;
             }
